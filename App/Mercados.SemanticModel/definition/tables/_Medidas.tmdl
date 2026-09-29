@@ -94,7 +94,7 @@ table _Medidas
 			RETURN
 			    IF (
 			        NOT ISBLANK ( _Rentabilidad ) && _Dias > 0,
-			        POWER ( 1 + _Rentabilidad, 365 / _Dias ) - 1
+			        POWER ( 1 + _Rentabilidad, DIVIDE ( 365, _Dias ) ) - 1
 			    )
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: Rentabilidad
