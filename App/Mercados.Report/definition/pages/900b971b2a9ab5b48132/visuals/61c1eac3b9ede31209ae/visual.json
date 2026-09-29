@@ -1,0 +1,116 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "61c1eac3b9ede31209ae",
+  "position": {
+    "x": 20,
+    "y": 140,
+    "z": 2000,
+    "height": 920,
+    "width": 1880,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "scatterChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tickers"
+                    }
+                  },
+                  "Property": "Ticker"
+                }
+              },
+              "queryRef": "Tickers.Ticker",
+              "nativeQueryRef": "Ticker",
+              "active": true
+            }
+          ]
+        },
+        "Series": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Tickers"
+                    }
+                  },
+                  "Property": "Grupo"
+                }
+              },
+              "queryRef": "Tickers.Grupo",
+              "nativeQueryRef": "Grupo"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Volatilidad Anualizada"
+                }
+              },
+              "queryRef": "_Medidas.Volatilidad Anualizada",
+              "nativeQueryRef": "Volatilidad Anualizada",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Rentabilidad Anualizada"
+                }
+              },
+              "queryRef": "_Medidas.Rentabilidad Anualizada",
+              "nativeQueryRef": "Rentabilidad Anualizada"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Riesgo (volatilidad) vs rentabilidad anualizada'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

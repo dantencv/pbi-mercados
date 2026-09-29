@@ -1,12 +1,12 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
-  "name": "935a00bf4c9a6ae11260",
+  "name": "6fa5cf5c8d2daff9fd89",
   "position": {
     "x": 20,
     "y": 20,
     "z": 0,
     "height": 100,
-    "width": 560,
+    "width": 900,
     "tabOrder": 0
   },
   "visual": {
@@ -23,11 +23,11 @@
                       "Entity": "Tickers"
                     }
                   },
-                  "Property": "Ticker"
+                  "Property": "Grupo"
                 }
               },
-              "queryRef": "Tickers.Ticker",
-              "nativeQueryRef": "Ticker",
+              "queryRef": "Tickers.Grupo",
+              "nativeQueryRef": "Grupo",
               "active": true
             }
           ]
@@ -63,7 +63,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Valores'"
+                  "Value": "'Grupo'"
                 }
               }
             }
@@ -72,23 +72,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "9b64b2c39eee71c0792d",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Tickers"
-              }
-            },
-            "Property": "Ticker"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }

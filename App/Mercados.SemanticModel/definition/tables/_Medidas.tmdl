@@ -75,6 +75,37 @@ table _Medidas
 		displayFolder: Volumen
 		lineageTag: 719e6db5-4772-4375-9621-bd9856d2104e
 
+	/// Desviación típica de las rentabilidades diarias del contexto, anualizada (x raíz de 252 sesiones).
+	measure 'Volatilidad Anualizada' =
+			IF (
+			    HASONEVALUE ( Precios[Ticker] ),
+			    STDEV.S ( Precios[RentabilidadDiaria] ) * SQRT ( 252 )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Riesgo
+		lineageTag: 30cd7bb0-f1bf-4060-9d07-ec460a52cc9c
+
+	/// Tasa anual compuesta (CAGR) equivalente a la rentabilidad acumulada del periodo seleccionado.
+	measure 'Rentabilidad Anualizada' =
+			VAR _Inicio = CALCULATE ( MIN ( Precios[Fecha] ), ALLSELECTED ( Calendario ) )
+			VAR _Fin = MAX ( Precios[Fecha] )
+			VAR _Dias = DATEDIFF ( _Inicio, _Fin, DAY )
+			VAR _Rentabilidad = [Rentabilidad Acumulada]
+			RETURN
+			    IF (
+			        NOT ISBLANK ( _Rentabilidad ) && _Dias > 0,
+			        POWER ( 1 + _Rentabilidad, 365 / _Dias ) - 1
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Rentabilidad
+		lineageTag: a047c9fa-c0f5-44be-9844-67d191cd8c9e
+
+	/// Rentabilidad anualizada por unidad de volatilidad (ratio tipo Sharpe sin tipo libre de riesgo).
+	measure 'Rentabilidad / Riesgo' = DIVIDE ( [Rentabilidad Anualizada], [Volatilidad Anualizada] )
+		formatString: 0.00
+		displayFolder: Riesgo
+		lineageTag: e03440ba-2372-448e-a3b3-6aa74285b888
+
 	column Id
 		dataType: int64
 		isHidden

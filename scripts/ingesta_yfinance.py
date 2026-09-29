@@ -23,7 +23,8 @@ CONFIG = RAIZ / "config" / "tickers.csv"
 DATA = RAIZ / "data"
 
 COLUMNAS_PRECIOS = ["Fecha", "Ticker", "Apertura", "Maximo", "Minimo",
-                    "Cierre", "CierreAjustado", "Volumen", "Dividendos", "Splits"]
+                    "Cierre", "CierreAjustado", "Volumen", "Dividendos", "Splits",
+                    "RentabilidadDiaria"]
 
 
 def leer_config() -> pd.DataFrame:
@@ -45,6 +46,8 @@ def descargar_precios(ticker: str, desde: str) -> pd.DataFrame:
         "Dividends": "Dividendos", "Stock Splits": "Splits",
     })
     hist["Ticker"] = ticker
+    # Rentabilidad diaria sobre el cierre ajustado (la primera sesión queda vacía)
+    hist["RentabilidadDiaria"] = hist["CierreAjustado"].pct_change(fill_method=None)
     for col in COLUMNAS_PRECIOS:
         if col not in hist.columns:
             hist[col] = 0
@@ -61,7 +64,8 @@ def descargar_info(ticker: str, grupo: str) -> dict:
         "Ticker": ticker,
         "Nombre": info.get("longName") or info.get("shortName") or ticker,
         "Grupo": grupo,
-        "Sector": info.get("sector", "N/D"),
+        # Los ETFs no tienen sector: se usa su categoría (p. ej. "Technology")
+        "Sector": info.get("sector") or info.get("category") or "N/D",
         "Industria": info.get("industry", "N/D"),
         "Moneda": info.get("currency", "N/D"),
         "Tipo": info.get("quoteType", "N/D"),

@@ -107,6 +107,48 @@
                       "Entity": "_Medidas"
                     }
                   },
+                  "Property": "Rentabilidad Anualizada"
+                }
+              },
+              "queryRef": "_Medidas.Rentabilidad Anualizada",
+              "nativeQueryRef": "Rentabilidad Anualizada"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Volatilidad Anualizada"
+                }
+              },
+              "queryRef": "_Medidas.Volatilidad Anualizada",
+              "nativeQueryRef": "Volatilidad Anualizada"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
+                  "Property": "Rentabilidad / Riesgo"
+                }
+              },
+              "queryRef": "_Medidas.Rentabilidad / Riesgo",
+              "nativeQueryRef": "Rentabilidad / Riesgo"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
                   "Property": "Máximo Periodo"
                 }
               },
@@ -143,6 +185,23 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Medidas"
+                  }
+                },
+                "Property": "Rentabilidad Anualizada"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
       }
     },
     "visualContainerObjects": {

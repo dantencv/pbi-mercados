@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
-  "name": "935a00bf4c9a6ae11260",
+  "name": "111a44b16b8ae5ec6e7e",
   "position": {
-    "x": 20,
+    "x": 940,
     "y": 20,
-    "z": 0,
+    "z": 1000,
     "height": 100,
-    "width": 560,
-    "tabOrder": 0
+    "width": 960,
+    "tabOrder": 1000
   },
   "visual": {
     "visualType": "slicer",
@@ -20,14 +20,14 @@
                 "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Tickers"
+                      "Entity": "Calendario"
                     }
                   },
-                  "Property": "Ticker"
+                  "Property": "Fecha"
                 }
               },
-              "queryRef": "Tickers.Ticker",
-              "nativeQueryRef": "Ticker",
+              "queryRef": "Calendario.Fecha",
+              "nativeQueryRef": "Fecha",
               "active": true
             }
           ]
@@ -41,7 +41,7 @@
             "mode": {
               "expr": {
                 "Literal": {
-                  "Value": "'Dropdown'"
+                  "Value": "'Between'"
                 }
               }
             }
@@ -63,7 +63,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Valores'"
+                  "Value": "'Periodo'"
                 }
               }
             }
@@ -72,23 +72,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "9b64b2c39eee71c0792d",
-        "field": {
-          "Column": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "Tickers"
-              }
-            },
-            "Property": "Ticker"
-          }
-        },
-        "type": "Categorical"
-      }
-    ]
   }
 }
