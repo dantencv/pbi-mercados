@@ -1,0 +1,20 @@
+# --- Power BI Project (PBIP) ---
+# Ajustes locales y caché de datos del modelo: no se versionan
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+# Por si alguien guarda una copia binaria
+*.pbix
+
+# --- Datos generados por el script de ingesta (se regeneran) ---
+data/
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# --- Editor / SO ---
+.vscode/
+Thumbs.db
+desktop.ini
