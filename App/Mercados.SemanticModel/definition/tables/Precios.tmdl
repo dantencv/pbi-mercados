@@ -3,15 +3,11 @@ table Precios
 
 	column Fecha
 		dataType: dateTime
+		isHidden
 		formatString: Long Date
 		lineageTag: 78ddecd2-756b-4029-bdb0-5310fb23c9bc
 		summarizeBy: none
 		sourceColumn: Fecha
-
-		variation Variación
-			isDefault
-			relationship: 3278c09a-8462-4121-b6c3-0c91f4d1888f
-			defaultHierarchy: LocalDateTable_f3c2f69b-5e98-462d-bce2-e759c46166f6.'Jerarquía de fechas'
 
 		annotation SummarizationSetBy = Automatic
 

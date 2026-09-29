@@ -1,9 +1,8 @@
-relationship 3278c09a-8462-4121-b6c3-0c91f4d1888f
-	joinOnDateBehavior: datePartOnly
-	fromColumn: Precios.Fecha
-	toColumn: LocalDateTable_f3c2f69b-5e98-462d-bce2-e759c46166f6.Date
-
 relationship AutoDetected_ed6ac9c7-c0b2-4e54-b625-4ef80d3498ef
 	fromColumn: Precios.Ticker
 	toColumn: Tickers.Ticker
+
+relationship 745311f1-0078-4e3f-9de5-cfebc562d274
+	fromColumn: Precios.Fecha
+	toColumn: Calendario.Fecha
 

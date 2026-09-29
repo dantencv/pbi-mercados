@@ -17,106 +17,17 @@
           "projections": [
             {
               "field": {
-                "HierarchyLevel": {
+                "Column": {
                   "Expression": {
-                    "Hierarchy": {
-                      "Expression": {
-                        "PropertyVariationSource": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Entity": "Precios"
-                            }
-                          },
-                          "Name": "Variación",
-                          "Property": "Fecha"
-                        }
-                      },
-                      "Hierarchy": "Jerarquía de fechas"
+                    "SourceRef": {
+                      "Entity": "Calendario"
                     }
                   },
-                  "Level": "Año"
+                  "Property": "Fecha"
                 }
               },
-              "queryRef": "Precios.Fecha.Variación.Jerarquía de fechas.Año",
-              "nativeQueryRef": "Fecha Año",
-              "active": true
-            },
-            {
-              "field": {
-                "HierarchyLevel": {
-                  "Expression": {
-                    "Hierarchy": {
-                      "Expression": {
-                        "PropertyVariationSource": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Entity": "Precios"
-                            }
-                          },
-                          "Name": "Variación",
-                          "Property": "Fecha"
-                        }
-                      },
-                      "Hierarchy": "Jerarquía de fechas"
-                    }
-                  },
-                  "Level": "Trimestre"
-                }
-              },
-              "queryRef": "Precios.Fecha.Variación.Jerarquía de fechas.Trimestre",
-              "nativeQueryRef": "Fecha Trimestre",
-              "active": true
-            },
-            {
-              "field": {
-                "HierarchyLevel": {
-                  "Expression": {
-                    "Hierarchy": {
-                      "Expression": {
-                        "PropertyVariationSource": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Entity": "Precios"
-                            }
-                          },
-                          "Name": "Variación",
-                          "Property": "Fecha"
-                        }
-                      },
-                      "Hierarchy": "Jerarquía de fechas"
-                    }
-                  },
-                  "Level": "Mes"
-                }
-              },
-              "queryRef": "Precios.Fecha.Variación.Jerarquía de fechas.Mes",
-              "nativeQueryRef": "Fecha Mes",
-              "active": true
-            },
-            {
-              "field": {
-                "HierarchyLevel": {
-                  "Expression": {
-                    "Hierarchy": {
-                      "Expression": {
-                        "PropertyVariationSource": {
-                          "Expression": {
-                            "SourceRef": {
-                              "Entity": "Precios"
-                            }
-                          },
-                          "Name": "Variación",
-                          "Property": "Fecha"
-                        }
-                      },
-                      "Hierarchy": "Jerarquía de fechas"
-                    }
-                  },
-                  "Level": "Día"
-                }
-              },
-              "queryRef": "Precios.Fecha.Variación.Jerarquía de fechas.Día",
-              "nativeQueryRef": "Fecha Día",
+              "queryRef": "Calendario.Fecha",
+              "nativeQueryRef": "Fecha",
               "active": true
             }
           ]
@@ -143,22 +54,17 @@
           "projections": [
             {
               "field": {
-                "Aggregation": {
+                "Measure": {
                   "Expression": {
-                    "Column": {
-                      "Expression": {
-                        "SourceRef": {
-                          "Entity": "Precios"
-                        }
-                      },
-                      "Property": "CierreAjustado"
+                    "SourceRef": {
+                      "Entity": "_Medidas"
                     }
                   },
-                  "Function": 0
+                  "Property": "Precio"
                 }
               },
-              "queryRef": "Sum(Precios.CierreAjustado)",
-              "nativeQueryRef": "Suma de CierreAjustado"
+              "queryRef": "_Medidas.Precio",
+              "nativeQueryRef": "Precio"
             }
           ]
         }
@@ -185,99 +91,13 @@
       {
         "name": "711313e0e6c50a03c4c0",
         "field": {
-          "HierarchyLevel": {
+          "Column": {
             "Expression": {
-              "Hierarchy": {
-                "Expression": {
-                  "PropertyVariationSource": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "Precios"
-                      }
-                    },
-                    "Name": "Variación",
-                    "Property": "Fecha"
-                  }
-                },
-                "Hierarchy": "Jerarquía de fechas"
+              "SourceRef": {
+                "Entity": "Calendario"
               }
             },
-            "Level": "Año"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "fcf93ddf082a0b0b59d0",
-        "field": {
-          "HierarchyLevel": {
-            "Expression": {
-              "Hierarchy": {
-                "Expression": {
-                  "PropertyVariationSource": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "Precios"
-                      }
-                    },
-                    "Name": "Variación",
-                    "Property": "Fecha"
-                  }
-                },
-                "Hierarchy": "Jerarquía de fechas"
-              }
-            },
-            "Level": "Trimestre"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "066dcce9c87c654609a1",
-        "field": {
-          "HierarchyLevel": {
-            "Expression": {
-              "Hierarchy": {
-                "Expression": {
-                  "PropertyVariationSource": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "Precios"
-                      }
-                    },
-                    "Name": "Variación",
-                    "Property": "Fecha"
-                  }
-                },
-                "Hierarchy": "Jerarquía de fechas"
-              }
-            },
-            "Level": "Mes"
-          }
-        },
-        "type": "Categorical"
-      },
-      {
-        "name": "488204021a908a11a929",
-        "field": {
-          "HierarchyLevel": {
-            "Expression": {
-              "Hierarchy": {
-                "Expression": {
-                  "PropertyVariationSource": {
-                    "Expression": {
-                      "SourceRef": {
-                        "Entity": "Precios"
-                      }
-                    },
-                    "Name": "Variación",
-                    "Property": "Fecha"
-                  }
-                },
-                "Hierarchy": "Jerarquía de fechas"
-              }
-            },
-            "Level": "Día"
+            "Property": "Fecha"
           }
         },
         "type": "Advanced"
@@ -285,18 +105,13 @@
       {
         "name": "864ae4470ccbc156a2b5",
         "field": {
-          "Aggregation": {
+          "Measure": {
             "Expression": {
-              "Column": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Precios"
-                  }
-                },
-                "Property": "CierreAjustado"
+              "SourceRef": {
+                "Entity": "_Medidas"
               }
             },
-            "Function": 0
+            "Property": "Precio"
           }
         },
         "type": "Advanced"
