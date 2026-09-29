@@ -33,6 +33,32 @@
             "width": 234
           },
           "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 824,
+            "y": 13.5
+          },
+          "nodeIndex": "_Medidas",
+          "nodeLineageTag": "9b5eb3ad-7531-4f2b-9303-645a09cb9e14",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1108,
+            "y": 27.5
+          },
+          "nodeIndex": "Calendario",
+          "nodeLineageTag": "86520d09-455f-47e4-9095-ce9d4843b42f",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
         }
       ],
       "name": "Todas las tablas",

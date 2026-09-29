@@ -1,0 +1,92 @@
+table _Medidas
+	lineageTag: 9b5eb3ad-7531-4f2b-9303-645a09cb9e14
+
+	/// Cierre ajustado de la última sesión del contexto (requiere un único ticker).
+	measure Precio =
+			VAR _UltimaFecha = MAX ( Precios[Fecha] )
+			RETURN
+			    IF (
+			        HASONEVALUE ( Precios[Ticker] ),
+			        CALCULATE ( MAX ( Precios[CierreAjustado] ), Precios[Fecha] = _UltimaFecha )
+			    )
+		formatString: #,0.00
+		displayFolder: Precios
+		lineageTag: 0b1a1e79-ba0b-4ce8-8b85-c70ee6bc70ba
+
+	/// Cierre ajustado de la primera sesión del contexto (requiere un único ticker).
+	measure 'Precio Inicial' =
+			VAR _PrimeraFecha = MIN ( Precios[Fecha] )
+			RETURN
+			    IF (
+			        HASONEVALUE ( Precios[Ticker] ),
+			        CALCULATE ( MAX ( Precios[CierreAjustado] ), Precios[Fecha] = _PrimeraFecha )
+			    )
+		formatString: #,0.00
+		displayFolder: Precios
+		lineageTag: 4f21f0d8-ba13-43f4-8cfc-a470c417244f
+
+	/// Cierre ajustado máximo en el contexto.
+	measure 'Máximo Periodo' = IF ( HASONEVALUE ( Precios[Ticker] ), MAX ( Precios[CierreAjustado] ) )
+		formatString: #,0.00
+		displayFolder: Precios
+		lineageTag: 7ba25eb5-654e-4b67-b70c-e470d897ba28
+
+	/// Última sesión con datos en el contexto.
+	measure 'Última Fecha' = MAX ( Precios[Fecha] )
+		formatString: dd/mm/yyyy
+		displayFolder: Precios
+		lineageTag: 893a8ddb-4451-449b-821a-8110397dd57c
+
+	/// Rentabilidad desde el inicio del periodo seleccionado hasta la fecha del contexto (base 0 %, sirve para comparar tickers).
+	measure 'Rentabilidad Acumulada' =
+			VAR _Precio = [Precio]
+			VAR _Inicial = CALCULATE ( [Precio Inicial], ALLSELECTED ( Calendario ) )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( _Precio ) && NOT ISBLANK ( _Inicial ),
+			        DIVIDE ( _Precio, _Inicial ) - 1
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Rentabilidad
+		lineageTag: 8673ba75-3d4a-4fc8-bbd5-9398592e532b
+
+	/// Caída desde el máximo alcanzado dentro del periodo seleccionado hasta la fecha del contexto.
+	measure Drawdown =
+			VAR _Fecha = MAX ( Precios[Fecha] )
+			VAR _Precio = [Precio]
+			VAR _MaxHastaFecha =
+			    CALCULATE (
+			        MAX ( Precios[CierreAjustado] ),
+			        ALLSELECTED ( Calendario ),
+			        KEEPFILTERS ( Calendario[Fecha] <= _Fecha )
+			    )
+			RETURN
+			    IF (
+			        NOT ISBLANK ( _Precio ) && NOT ISBLANK ( _MaxHastaFecha ),
+			        DIVIDE ( _Precio, _MaxHastaFecha ) - 1
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Riesgo
+		lineageTag: c1db7d24-f566-4944-bb5c-f8cc18bd921a
+
+	/// Volumen medio diario en el contexto.
+	measure 'Volumen Medio' = IF ( HASONEVALUE ( Precios[Ticker] ), AVERAGE ( Precios[Volumen] ) )
+		formatString: #,0
+		displayFolder: Volumen
+		lineageTag: 719e6db5-4772-4375-9621-bd9856d2104e
+
+	column Id
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 12f45c86-17a3-436a-8bbc-e9b5571d2a28
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Id]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Medidas = calculated
+		mode: import
+		source = ROW ( "Id", 1 )
+
