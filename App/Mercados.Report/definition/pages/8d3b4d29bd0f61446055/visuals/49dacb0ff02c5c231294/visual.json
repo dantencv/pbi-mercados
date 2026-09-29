@@ -84,7 +84,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Rentabilidad acumulada en el periodo'"
+                  "Value": "'Rentabilidad acumulada (base 0 %)'"
                 }
               }
             }
