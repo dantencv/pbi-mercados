@@ -42,3 +42,6 @@ Claude edita los ficheros de texto del proyecto; el humano valida en Power BI De
   - MENOR: funcionalidad nueva (medida, página, tabla, valores).
   - PARCHE: correcciones y ajustes de formato.
 - Actualizar `CHANGELOG.md` (sección *Sin publicar*) en cada PR.
+- **Antes de crear un tag**: `git switch main && git pull`, comprobar con `git log` que están todas las PR de la versión y abrir el `.pbip` para validarlo.
+- **Tras resolver un conflicto en ficheros PBIR/TMDL**: validar el JSON/TMDL (sin marcas `<<<<<<<`) y abrir el `.pbip` en Desktop antes de hacer commit.
+- Un cambio que afecta a varias capas (ingesta → modelo → informe) va en una sola rama/PR para que cada versión sea coherente.

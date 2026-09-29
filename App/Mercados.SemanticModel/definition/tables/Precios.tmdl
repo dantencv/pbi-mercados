@@ -100,6 +100,15 @@ table Precios
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column RentabilidadDiaria
+		dataType: double
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 42188df1-b5c2-4dfd-8901-9f72fdc8d460
+		summarizeBy: none
+		sourceColumn: RentabilidadDiaria
+
+		annotation SummarizationSetBy = User
+
 	partition Precios = m
 		mode: import
 		source =
@@ -110,7 +119,8 @@ table Precios
 				        {"Fecha", type date}, {"Ticker", type text},
 				        {"Apertura", type number}, {"Maximo", type number}, {"Minimo", type number},
 				        {"Cierre", type number}, {"CierreAjustado", type number},
-				        {"Volumen", Int64.Type}, {"Dividendos", type number}, {"Splits", type number}
+				        {"Volumen", Int64.Type}, {"Dividendos", type number}, {"Splits", type number},
+				        {"RentabilidadDiaria", type number}
 				    }, "en-US")
 				in
 				    Tipos

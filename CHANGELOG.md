@@ -5,6 +5,18 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ## [Sin publicar]
 
+## [1.1.0] - 2026-09-29
+
+### Añadido
+- ETFs en `config/tickers.csv`: SPY, QQQ, XLK, SMH y VGT (grupo `ETF`).
+- Columna `RentabilidadDiaria` calculada en la ingesta y cargada en `Precios`.
+- Medidas: Volatilidad Anualizada, Rentabilidad Anualizada (CAGR) y Rentabilidad / Riesgo.
+- Página **Riesgo vs rentabilidad**: dispersión volatilidad vs rentabilidad anualizada por valor y grupo.
+- Tabla resumen de *Rentabilidad y riesgo* con las nuevas medidas.
+
+### Cambiado
+- La ingesta usa la categoría del fondo como `Sector` cuando el valor es un ETF.
+
 ## [1.0.0] - 2026-09-29
 
 ### Añadido
@@ -18,5 +30,6 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ### Cambiado
 - Desactivada la fecha/hora automática de Power BI en favor de la tabla `Calendario`.
 
-[Sin publicar]: https://github.com/dantencv/pbi-mercados/compare/v1.0.0...HEAD
+[Sin publicar]: https://github.com/dantencv/pbi-mercados/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/dantencv/pbi-mercados/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/dantencv/pbi-mercados/releases/tag/v1.0.0
