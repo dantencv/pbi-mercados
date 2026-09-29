@@ -84,7 +84,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Rentabilidad acumulada (base 0 %)'"
+                  "Value": "'Rentabilidad acumulada vs Inicio'"
                 }
               }
             }
@@ -93,5 +93,51 @@
       ]
     },
     "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b98f0e505ac71b09357c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Calendario"
+              }
+            },
+            "Property": "Fecha"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2cf6ef616ca3cb89a2cd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Tickers"
+              }
+            },
+            "Property": "Ticker"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "02f1cb2c3714c5005961",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "_Medidas"
+              }
+            },
+            "Property": "Rentabilidad Acumulada"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
   }
 }
