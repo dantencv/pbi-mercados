@@ -1,0 +1,22 @@
+model Model
+	culture: es-ES
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: es-ES
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["RutaDatos","Precios","Tickers"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Precios
+ref table DateTableTemplate_98cc865a-55c8-4ee9-b2d4-7fea951d42f5
+ref table LocalDateTable_f3c2f69b-5e98-462d-bce2-e759c46166f6
+ref table Tickers
+
+ref cultureInfo es-ES
+

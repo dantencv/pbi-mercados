@@ -1,0 +1,123 @@
+table Precios
+	lineageTag: e1d5b461-0b3e-484d-bcd3-545ef4d0f572
+
+	column Fecha
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 78ddecd2-756b-4029-bdb0-5310fb23c9bc
+		summarizeBy: none
+		sourceColumn: Fecha
+
+		variation Variación
+			isDefault
+			relationship: 3278c09a-8462-4121-b6c3-0c91f4d1888f
+			defaultHierarchy: LocalDateTable_f3c2f69b-5e98-462d-bce2-e759c46166f6.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Ticker
+		dataType: string
+		lineageTag: 194eb04c-edc3-4c59-9726-4c9abef97b08
+		summarizeBy: none
+		sourceColumn: Ticker
+
+		annotation SummarizationSetBy = Automatic
+
+	column Apertura
+		dataType: double
+		lineageTag: f74b5e26-ca3f-4884-a06b-7060dfd5d662
+		summarizeBy: sum
+		sourceColumn: Apertura
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Maximo
+		dataType: double
+		lineageTag: ffb05c09-87d9-4698-b186-d315d940382b
+		summarizeBy: sum
+		sourceColumn: Maximo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Minimo
+		dataType: double
+		lineageTag: e8454557-e5d3-461c-89a9-de4979094389
+		summarizeBy: sum
+		sourceColumn: Minimo
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Cierre
+		dataType: double
+		lineageTag: e5b945e6-1e44-4619-9cc0-4d736c9c60f2
+		summarizeBy: sum
+		sourceColumn: Cierre
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CierreAjustado
+		dataType: double
+		lineageTag: ece93932-8090-4237-ac67-1dff1d68cb92
+		summarizeBy: sum
+		sourceColumn: CierreAjustado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Volumen
+		dataType: int64
+		formatString: 0
+		lineageTag: 1b4c666d-4afe-4bcb-a548-faa55415f650
+		summarizeBy: sum
+		sourceColumn: Volumen
+
+		annotation SummarizationSetBy = Automatic
+
+	column Dividendos
+		dataType: double
+		lineageTag: 6f2016cd-d60c-4a3d-95df-4006de2faf8d
+		summarizeBy: sum
+		sourceColumn: Dividendos
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Splits
+		dataType: double
+		lineageTag: 73678382-26f1-4a27-bbe6-14fa828a110d
+		summarizeBy: sum
+		sourceColumn: Splits
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Precios = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "precios.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {
+				        {"Fecha", type date}, {"Ticker", type text},
+				        {"Apertura", type number}, {"Maximo", type number}, {"Minimo", type number},
+				        {"Cierre", type number}, {"CierreAjustado", type number},
+				        {"Volumen", Int64.Type}, {"Dividendos", type number}, {"Splits", type number}
+				    }, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,9 @@
+expression RutaDatos =
+		let
+		    Origen = "C:\Proyectos\pbi-mercados\data\" meta [IsParameterQuery = true, IsParameterQueryRequired = false, Type = type text]
+		in
+		    Origen
+	lineageTag: 3ea1e88b-5074-42fa-91c4-2a6912cfa171
+
+	annotation PBI_ResultType = Text
+

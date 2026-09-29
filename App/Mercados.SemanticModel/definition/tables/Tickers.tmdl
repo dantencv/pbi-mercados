@@ -1,0 +1,71 @@
+table Tickers
+	lineageTag: 890b62e3-078b-4b54-b1cf-47879c3db540
+
+	column Ticker
+		dataType: string
+		lineageTag: f22fdd29-cf09-4b0a-ba2e-b35a1eb42222
+		summarizeBy: none
+		sourceColumn: Ticker
+
+		annotation SummarizationSetBy = Automatic
+
+	column Nombre
+		dataType: string
+		lineageTag: c4f80941-f3f4-430d-ad5f-816ae164b68b
+		summarizeBy: none
+		sourceColumn: Nombre
+
+		annotation SummarizationSetBy = Automatic
+
+	column Grupo
+		dataType: string
+		lineageTag: f1e4ae40-6b99-4ba1-9543-4de111751485
+		summarizeBy: none
+		sourceColumn: Grupo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sector
+		dataType: string
+		lineageTag: 9251501d-8a73-4bf5-b041-969898b3bd8e
+		summarizeBy: none
+		sourceColumn: Sector
+
+		annotation SummarizationSetBy = Automatic
+
+	column Industria
+		dataType: string
+		lineageTag: c884ce35-8340-4ad9-872b-1fd4a85c0923
+		summarizeBy: none
+		sourceColumn: Industria
+
+		annotation SummarizationSetBy = Automatic
+
+	column Moneda
+		dataType: string
+		lineageTag: 9757a8ad-66b7-49f2-9c8f-2d30ce0a06dd
+		summarizeBy: none
+		sourceColumn: Moneda
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tipo
+		dataType: string
+		lineageTag: 64f3ac53-8458-4985-a329-62316ed50925
+		summarizeBy: none
+		sourceColumn: Tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Tickers = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "tickers.csv"), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars=true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, List.Transform(Table.ColumnNames(Encabezados), each {_, type text}))
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+
