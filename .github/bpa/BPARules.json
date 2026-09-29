@@ -1,0 +1,82 @@
+[
+  {
+    "ID": "MERC_MEDIDAS_EN_TABLA_MEDIDAS",
+    "Name": "[Convención] Las medidas deben estar en la tabla _Medidas",
+    "Category": "Convenciones del proyecto",
+    "Description": "Todas las medidas viven en _Medidas (ver CLAUDE.md).",
+    "Severity": 3,
+    "Scope": "Measure",
+    "Expression": "Table.Name != \"_Medidas\"",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MERC_MEDIDA_DESCRIPCION",
+    "Name": "[Convención] Las medidas deben tener descripción",
+    "Category": "Convenciones del proyecto",
+    "Description": "Añadir una descripción con /// en la línea anterior a la medida.",
+    "Severity": 2,
+    "Scope": "Measure",
+    "Expression": "string.IsNullOrWhitespace(Description)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MERC_MEDIDA_FORMATO",
+    "Name": "[Convención] Las medidas deben tener formato",
+    "Category": "Convenciones del proyecto",
+    "Description": "Definir formatString en todas las medidas.",
+    "Severity": 2,
+    "Scope": "Measure",
+    "Expression": "string.IsNullOrWhitespace(FormatString)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MERC_MEDIDA_CARPETA",
+    "Name": "[Convención] Las medidas deben estar en una carpeta",
+    "Category": "Convenciones del proyecto",
+    "Description": "Definir displayFolder (Precios, Rentabilidad, Riesgo, Volumen...).",
+    "Severity": 1,
+    "Scope": "Measure",
+    "Expression": "string.IsNullOrWhitespace(DisplayFolder)",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MERC_USAR_DIVIDE",
+    "Name": "[DAX] Usar DIVIDE en lugar del operador /",
+    "Category": "DAX",
+    "Description": "DIVIDE gestiona la división entre cero y deja el código más robusto.",
+    "Severity": 2,
+    "Scope": "Measure, CalculatedColumn",
+    "Expression": "Expression.Contains(\" / \") or Expression.Replace(\" \", \"\").Contains(\"]/\") or Expression.Replace(\" \", \"\").Contains(\")/\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MERC_SIN_FECHA_AUTOMATICA",
+    "Name": "[Modelo] La fecha/hora automática debe estar desactivada",
+    "Category": "Modelo",
+    "Description": "Existen tablas LocalDateTable_*: usar la tabla Calendario.",
+    "Severity": 3,
+    "Scope": "Table",
+    "Expression": "Name.StartsWith(\"LocalDateTable_\") or Name.StartsWith(\"DateTableTemplate_\")",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MERC_TABLA_FECHAS",
+    "Name": "[Modelo] Debe existir una tabla de fechas marcada",
+    "Category": "Modelo",
+    "Description": "El modelo necesita una tabla con dataCategory Time y una columna fecha clave.",
+    "Severity": 3,
+    "Scope": "Model",
+    "Expression": "Tables.Any(DataCategory == \"Time\" and Columns.Any(IsKey == true)) == false",
+    "CompatibilityLevel": 1200
+  },
+  {
+    "ID": "MERC_SIN_BIDIRECCIONALES",
+    "Name": "[Modelo] Evitar relaciones bidireccionales",
+    "Category": "Modelo",
+    "Description": "Las relaciones deben filtrar en una sola dirección.",
+    "Severity": 3,
+    "Scope": "Relationship",
+    "Expression": "CrossFilteringBehavior == CrossFilteringBehavior.BothDirections",
+    "CompatibilityLevel": 1200
+  }
+]

@@ -1,0 +1,48 @@
+# Revisión automática del modelo semántico con el Best Practice Analyzer (BPA)
+# de Tabular Editor 2. Se ejecuta en cada Pull Request que toque el modelo o las reglas.
+# - Severidad 3 (error)   -> el check falla y la PR queda en rojo.
+# - Severidad 1-2 (aviso) -> aparece como anotación en la PR, pero no bloquea.
+
+name: Revisión del modelo (BPA)
+
+on:
+  pull_request:
+    paths:
+      - "App/**/*.SemanticModel/**"
+      - ".github/bpa/**"
+      - ".github/workflows/bpa.yml"
+  workflow_dispatch: # permite lanzarlo a mano desde la pestaña Actions
+
+env:
+  TE_VERSION: "2.29.0" # versión fijada de Tabular Editor 2 (cambiarla conscientemente)
+  MODELO: "App/Mercados.SemanticModel/definition"
+  REGLAS: ".github/bpa/BPARules.json"
+
+jobs:
+  bpa:
+    name: Best Practice Analyzer
+    runs-on: windows-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Descargar Tabular Editor 2 (portable)
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download $env:TE_VERSION --repo TabularEditor/TabularEditor --pattern "*.zip" --dir te-zip
+          $zip = Get-ChildItem te-zip -Filter *.zip | Select-Object -First 1
+          Write-Host "Usando $($zip.Name)"
+          Expand-Archive $zip.FullName -DestinationPath te
+
+      - name: Ejecutar reglas BPA sobre el modelo
+        shell: pwsh
+        run: |
+          $exe = (Get-ChildItem te -Recurse -Filter TabularEditor.exe | Select-Object -First 1).FullName
+          $teArgs = @("`"$env:MODELO`"", "-A", "`"$env:REGLAS`"", "-G")
+          $p = Start-Process -FilePath $exe -ArgumentList $teArgs -Wait -NoNewWindow -PassThru
+          if ($p.ExitCode -ne 0) {
+            Write-Host "::error::El BPA ha encontrado incumplimientos de severidad 3. Revisa las anotaciones."
+          }
+          exit $p.ExitCode
