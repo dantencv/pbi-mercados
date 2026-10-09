@@ -8,7 +8,11 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 ### Añadido
 - Revisión automática del modelo con el Best Practice Analyzer (GitHub Actions) en cada PR.
 
+### Cambiado
+- Títulos de los visuales en azul oscuro (`#1F3864`).
+
 ### Corregido
+- El gráfico de precios no tenía título: ahora se titula «Precio Cierre ajustado».
 - `Rentabilidad Anualizada` usa `DIVIDE` en lugar del operador `/` (aviso del BPA).
 
 ## [1.1.0] - 2026-09-29

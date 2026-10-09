@@ -87,6 +87,17 @@
                   "Value": "'Drawdown (caída desde máximo)'"
                 }
               }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1F3864'"
+                    }
+                  }
+                }
+              }
             }
           }
         }

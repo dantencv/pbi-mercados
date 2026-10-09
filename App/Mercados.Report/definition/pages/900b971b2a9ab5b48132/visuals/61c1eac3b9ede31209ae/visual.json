@@ -106,6 +106,17 @@
                   "Value": "'Riesgo (volatilidad) vs rentabilidad anualizada'"
                 }
               }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#1F3864'"
+                    }
+                  }
+                }
+              }
             }
           }
         }
