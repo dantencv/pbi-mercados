@@ -107,6 +107,20 @@
                       "Entity": "_Medidas"
                     }
                   },
+                  "Property": "Drawdown Máximo"
+                }
+              },
+              "queryRef": "_Medidas.Drawdown Máximo",
+              "nativeQueryRef": "Drawdown Máximo"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Medidas"
+                    }
+                  },
                   "Property": "Rentabilidad Anualizada"
                 }
               },

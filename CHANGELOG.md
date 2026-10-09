@@ -7,6 +7,8 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 
 ### Añadido
 - Revisión automática del modelo con el Best Practice Analyzer (GitHub Actions) en cada PR.
+- Medida `Drawdown Máximo` (carpeta Riesgo): peor caída desde máximo dentro del periodo seleccionado.
+- Columna `Drawdown Máximo` en la tabla «Resumen por valor» (página **Rentabilidad y riesgo**), junto a `Drawdown`.
 
 ### Cambiado
 - Títulos de los visuales en azul oscuro (`#1F3864`).

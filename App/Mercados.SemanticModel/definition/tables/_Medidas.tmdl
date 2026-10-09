@@ -106,6 +106,19 @@ table _Medidas
 		displayFolder: Riesgo
 		lineageTag: e03440ba-2372-448e-a3b3-6aa74285b888
 
+	/// Peor caída desde máximo (drawdown mínimo) registrada a lo largo de las fechas del periodo seleccionado (requiere un único ticker).
+	measure 'Drawdown Máximo' =
+			VAR _DrawdownMaximo =
+			    MINX (
+			        VALUES ( Calendario[Fecha] ),
+			        [Drawdown]
+			    )
+			RETURN
+			    _DrawdownMaximo
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: Riesgo
+		lineageTag: 6247d372-f08d-4afa-b14f-5049ee6adeea
+
 	column Id
 		dataType: int64
 		isHidden
