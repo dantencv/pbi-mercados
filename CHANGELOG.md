@@ -9,9 +9,11 @@ Formato basado en [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) y 
 - Revisión automática del modelo con el Best Practice Analyzer (GitHub Actions) en cada PR.
 - Medida `Drawdown Máximo` (carpeta Riesgo): peor caída desde máximo dentro del periodo seleccionado.
 - Columna `Drawdown Máximo` en la tabla «Resumen por valor» (página **Rentabilidad y riesgo**), junto a `Drawdown`.
+- Página **Drawdown Análisis**: drawdown histórico por valor (líneas) y drawdown máximo por valor (barras), con los segmentadores de Valores, Grupo y Periodo.
 
 ### Cambiado
 - Títulos de los visuales en azul oscuro (`#1F3864`).
+- `Drawdown` solo calcula el máximo previo cuando hay precio, y `Drawdown Máximo` recorre los precios una sola vez con `WINDOW` (≈10× más rápida, mismos resultados).
 
 ### Corregido
 - El gráfico de precios no tenía título: ahora se titula «Precio Cierre ajustado».

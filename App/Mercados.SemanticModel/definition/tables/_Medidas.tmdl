@@ -52,18 +52,19 @@ table _Medidas
 
 	/// Caída desde el máximo alcanzado dentro del periodo seleccionado hasta la fecha del contexto.
 	measure Drawdown =
-			VAR _Fecha = MAX ( Precios[Fecha] )
 			VAR _Precio = [Precio]
-			VAR _MaxHastaFecha =
-			    CALCULATE (
-			        MAX ( Precios[CierreAjustado] ),
-			        ALLSELECTED ( Calendario ),
-			        KEEPFILTERS ( Calendario[Fecha] <= _Fecha )
-			    )
 			RETURN
 			    IF (
-			        NOT ISBLANK ( _Precio ) && NOT ISBLANK ( _MaxHastaFecha ),
-			        DIVIDE ( _Precio, _MaxHastaFecha ) - 1
+			        NOT ISBLANK ( _Precio ),
+			        VAR _Fecha = MAX ( Precios[Fecha] )
+			        VAR _MaxHastaFecha =
+			            CALCULATE (
+			                MAX ( Precios[CierreAjustado] ),
+			                ALLSELECTED ( Calendario ),
+			                KEEPFILTERS ( Calendario[Fecha] <= _Fecha )
+			            )
+			        RETURN
+			            DIVIDE ( _Precio - _MaxHastaFecha, _MaxHastaFecha )
 			    )
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: Riesgo
@@ -108,13 +109,22 @@ table _Medidas
 
 	/// Peor caída desde máximo (drawdown mínimo) registrada a lo largo de las fechas del periodo seleccionado (requiere un único ticker).
 	measure 'Drawdown Máximo' =
-			VAR _DrawdownMaximo =
-			    MINX (
-			        VALUES ( Calendario[Fecha] ),
-			        [Drawdown]
-			    )
-			RETURN
-			    _DrawdownMaximo
+			IF (
+			    HASONEVALUE ( Precios[Ticker] ),
+			    VAR _Precios =
+			        SUMMARIZE ( Precios, Precios[Fecha], Precios[CierreAjustado] )
+			    VAR _ConMaximo =
+			        ADDCOLUMNS (
+			            _Precios,
+			            "@MaxHasta",
+			                MAXX (
+			                    WINDOW ( 1, ABS, 0, REL, _Precios, ORDERBY ( Precios[Fecha], ASC ) ),
+			                    Precios[CierreAjustado]
+			                )
+			        )
+			    RETURN
+			        MINX ( _ConMaximo, DIVIDE ( Precios[CierreAjustado] - [@MaxHasta], [@MaxHasta] ) )
+			)
 		formatString: 0.00%;-0.00%;0.00%
 		displayFolder: Riesgo
 		lineageTag: 6247d372-f08d-4afa-b14f-5049ee6adeea
